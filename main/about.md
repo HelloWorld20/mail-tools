@@ -1,3 +1,5 @@
+项目github地址：[https://github.com/HelloWorld20/mail-tools](https://github.com/HelloWorld20/mail-tools)
+
 ##双层柱状图
 lua：
 
@@ -371,7 +373,7 @@ lua：
 
 参考：无
 
-##LUA画自定义柱状图（账单）
+##LUA画自定义柱状图（账单、不稳定）
 
 方法定义：
 
