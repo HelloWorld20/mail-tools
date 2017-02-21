@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <title>Hello World!</title>
+<link rel="stylesheet" type="text/css" href="./app/lib/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="./app/lib/css/markdown.css">
+<style type="text/css">
+
+body{
+	padding-bottom: 50px;
+	padding-left: 30px;
+	padding-right: 30px;
+	/*padding-top: 50px;*/
+	font-family:"Microsoft YaHei";
+	-webkit-user-select:none;
+	width: 100%; 
+    border: none; 
+    outline: 1300px solid #fff;
+    margin: 0; 
+    cursor: default;
+}
+
+.select{
+	-webkit-user-select:text;
+}
+
+#msgBox{
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	min-height: 70px;
+	max-height: 200px;
+	overflow: auto;
+	width: 100%;
+	z-index: 1000;
+	padding: 15px;
+    border: 1px solid transparent;
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+.relative{
+	position: relative;
+}
+.tab-pane{
+	position: absolute;
+	width: 100%;
+	padding-bottom: 250px;
+}
+.hide{
+	display: none;
+}
+.form-control{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.nav a{
+	cursor: pointer;
+}
+
+.highLight{
+	background-color: rgb(238, 238, 238);
+	transition: background-color .2s ease-in-out;
+}
+
+#dropEml{
+	width: 90%;
+	height: 300px;
+	border: 2px dashed #eee;
+	border-radius: 4px;
+	margin: 10px auto;
+}
+
+#dropEml h2{
+	text-align: center;
+	margin-top: 100px;
+}
+
+#dropEml p{
+	text-align: center;
+	margin-top: 30px;
+}
+
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+	width:8px;
+}
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+	-webkit-box-shadow:inset006pxrgba(0,0,0,0.3);
+	border-radius:10px;
+}
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+	border-radius:10px;
+	background:rgba(0,0,0,0.1);
+	-webkit-box-shadow:inset006pxrgba(0,0,0,0.5);
+}
+	::-webkit-scrollbar-thumb:window-inactive {
+	background:rgba(255,0,0,0.4);
+}
+
+</style>
+</head>
+<body>
+	<a href="#" title="回到顶部">
+		<div id="msgBox" role="alert">
+		后台返回的消息会打印在此处。。。。
+	</div>
+	</a>
+    <h1>139投递平台开发辅助工具</h1>
+    We are using io.js <script>document.write(process.version)</script>
+    and Electron <script>document.write(process.versions['electron'])</script>.
+    <hr>
+
+    <ul id="nav" class="nav nav-tabs">
+    	<li><a data-href="#loginPage">登陆</a></li>
+    	<li class="active"><a data-href="#initPage">生成原始文件配置</a></li>
+    	<li><a data-href="#getFilePage">爬取生产线配置</a></li>
+    	<li><a data-href="#uploadFilePage">上传邮件模板</a></li>
+    	<li><a data-href="#sendMailPage">发送邮件</a></li>
+    	<li><a data-href="#eml">调试eml</a></li>
+    	<li><a data-href="#more">更多说明</a></li>
+    </ul>
+
+    <br>
+
+	<div class="tab relative">
+		<!-- 登录 start -->
+    	<div id="loginPage" class="tab-pane hide">
+    		登陆(暂不需要，去baseTools文件夹下的config.js文件修改就好)
+    	</div>
+		<!-- 登录 end -->
+    	<!-- 生成原始文件配置 start -->
+    	<div id="initPage" class="tab-pane">
+
+		    <form name="init">
+		        <table id="initTable" class="table">
+		            <thead>
+		                <th width="15%">名称</th>
+		                <th width="50%">内容</th>
+		                <th width="35%">说明</th>
+		            </thead>
+		            <tbody>
+		                <tr>
+		                    <td>业务全称：</td>
+		                    <td>
+		                        <input class="form-control" type="text" name="fullName" required="required" placeholder="广东集团客户明细账单" value="">
+		                    </td>
+		                    <td>
+		                        <p>必须。新建的文件夹名，以及web模板和wap模板的名字；</p>
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td>业务简称：</td>
+		                    <td>
+		                        <input class="form-control" type="text" name="shortName" required="required" placeholder="gdjtmx" value="">
+		                    </td>
+		                    <td><p>必须。bill格式才必须，生成XXX.config文件</p></td>
+		                </tr>
+		                <tr>
+		                    <td>web模板地址：</td>
+		                    <td>
+		                        <input class="form-control" type="text" name="webUrl" required="required" placeholder="http://fun.mail.10086.cn/10086/ah/351011/ah0001.html" value="">
+		                    </td>
+		                    <td>
+		                        <p>必须。设计稿Web模板url，为空则不生成</p>
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td>wap模板地址：</td>
+		                    <td>
+		                        <input class="form-control" type="text" name="wapUrl" required="required" placeholder="http://fun.mail.10086.cn/10086/ah/351011/ah0001_wap.html" value="">
+		                    </td>
+		                    <td>
+		                        <p>必须。设计稿wap模板url，为空则不生成</p>
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td>接口类型：</td>
+		                    <td>
+		                        <!-- <input class="form-control" type="text" name="apiType" required="required" placeholder="bill" value=""> -->
+		                        <select class="form-control" name="apiType">
+		                        	<option value="ng">ng</option>
+		                        	<option value="bill">bill</option>
+		                        	<option value="api_0">api_0</option>
+		                        	<option value="api_2">api_2</option>
+		                        </select>
+		                    </td>
+		                    <td>
+		                        <p>必须。涉及到生成文件的类型；</p>
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td>编码格式：</td>
+		                    <td>
+		                        <!-- <input class="form-control" type="text" name="charset" required="required" placeholder="utf-8" value=""> -->
+		                        <select class="form-control" name="charset">
+		                        	<option value="utf-8">utf-8</option>
+		                        	<option value="gb2312">gb2312</option>
+		                        </select>
+		                    </td>
+		                    <td>
+		                        <p>必须。设计稿模板的编码格式；如果生成的页面中文为问号，则说明编码格式错误</p>
+		                    </td>
+		                </tr>
+		            </tbody>
+		        </table>
+		        <button class="btn btn-large btn-primary" id="init">一键生成文件</button>
+		        <input class="btn btn-large btn-primary" type="reset" value="重置">
+		    </form>
+    	</div>
+		<!-- 生成原始文件配置 end -->
+		<!-- 爬取生产线配置 start -->
+    	<div id="getFilePage" class="tab-pane hide">
+    		<form name="getPage">
+		        <table id="getPageTable" class="table">
+		            <thead>
+		                <th width="15%">名称</th>
+		                <th width="50%">内容</th>
+		                <th width="35%">说明</th>
+		            </thead>
+		            <tbody>
+		                <tr>
+		                    <td>业务全称：</td>
+		                    <td>
+		                        <input class="form-control" type="text" name="fullName" required="required" placeholder="广东集团客户明细账单" value="">
+		                    </td>
+		                    <td>
+		                        <p>必须。新建的文件夹名，以及web模板和wap模板的名字；</p>
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td>邮件模板ID：</td>
+		                    <td>
+		                        <input class="form-control" type="text" name="yjmbID" required="required"  placeholder="21639" value="">
+		                    </td>
+		                    <td>
+		                        <p>必须。投递平台上邮件模板ID</p>
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td>封装资源ID：</td>
+		                    <td>
+		                        <input class="form-control" type="text" name="yjfzzyID" required="required" placeholder="13968" value="">
+		                    </td>
+		                    <td>
+		                        <p>必须。投递平台上封装资源ID</p>
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td>web模板地址：</td>
+		                    <td>
+		                        <input class="form-control" type="text" name="webUrl" required="required" placeholder="http://fun.mail.10086.cn/10086/ah/351011/ah0001.html" value="">
+		                    </td>
+		                    <td>
+		                        <p>必须。设计稿Web模板url，为空则不生成</p>
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td>wap模板地址：</td>
+		                    <td>
+		                        <input class="form-control" type="text" name="wapUrl" required="required" placeholder="http://fun.mail.10086.cn/10086/ah/351011/ah0001_wap.html" value="">
+		                    </td>
+		                    <td>
+		                        <p>必须。设计稿wap模板url，为空则不生成</p>
+		                    </td>
+		                </tr>
+
+		            </tbody>
+		        </table>
+		        <button id="getFile" class="btn btn-large btn-primary">一键爬取文件</button>
+		        <input class="btn btn-large btn-primary" type="reset" value="重置">
+		    </form>
+
+    	</div>
+		<!-- 爬取生产线配置 end -->
+
+    	<!-- 上传邮件模板 start -->
+    	<div id="uploadFilePage" class="tab-pane hide">
+    		<form name="upload">
+		        <table id="uploadTable" class="table">
+		            <thead>
+		                <th width="15%">名称</th>
+		                <th width="50%">内容</th>
+		                <th width="35%">说明</th>
+		            </thead>
+		            <tbody>
+		                <tr>
+		                    <td>邮件模板名称：</td>
+		                    <td>
+		                        <input class="form-control" type="text" name="tplName" required="required"  placeholder="河北1008611话费查询热线节点" value="">
+		                    </td>
+		                    <td>
+		                        <p>必须。投递平台上邮件模板名称。用于找到要对应的业务模板ID以及资源ID。如模板名有重复，则获取邮件模板列表的第一条记录。</p>
+		                    </td>
+		                </tr>
+		                <tr id="dropHtml">
+		                    <td>HTML模板路径：</td>
+		                    <td>
+		                    	<button id="uploadHtml" class="btn btn-primary">上传html模板</button>
+								&nbsp;&nbsp;&nbsp;&nbsp;可拖拽到此区域上传文件
+		                        <!-- <label class="btn btn-default btn-file">
+							    	拖拽上传html模板
+									<input id="uploadHtmlDrop" type="file" name="html">
+							    </label> -->
+
+							    <input id="uploadHtmlInput" class="form-control" type="text" name="uploadHtml" required="required"  placeholder="E:/delivery/api类/NG/hn0001/hn0001.html" value="">
+		                    </td>
+		                    <td>
+		                        <p>
+		                        	必须。要上传的web模板的路径。如果为空，则投递平台上的web模板也空
+		                        </p>
+		                    </td>
+		                </tr>
+		                <tr id="dropQvga">
+		                    <td>QVGA模板路径：</td>
+		                    <td>
+		                    	<button id="uploadQvga" class="btn btn-primary">上传qvga模板</button>
+								&nbsp;&nbsp;&nbsp;&nbsp;可拖拽到此区域上传文件
+
+							    <input id="uploadQvgaInput" class="form-control" type="text" name="uploadQvga"  placeholder="E:/delivery/api类/NG/hn0001/hn0001.qvga" value="">
+		                    </td>
+		                    <td>
+		                        <p>
+		                        	非必须。要上传的wap模板的路径。如果为空，则投递平台上的wap模板也空
+		                        </p>
+		                    </td>
+		                </tr>
+
+		                <tr id="dropResource">
+		                    <td>ResouceConfig.xml文件：</td>
+		                    <td>
+		                    	<button id="uploadResource" class="btn btn-primary">上传配置文件</button>
+								&nbsp;&nbsp;&nbsp;&nbsp;可拖拽到此区域上传文件
+
+							    <input id="uploadResourceInput" class="form-control" type="text" name="uploadResource"  placeholder="E:\delivery\api类\NG\安徽月账单查询\ParseConfig.xml" value="">
+		                    </td>
+		                    <td>
+		                        <p>
+		                        	非必须。要上传的ResouceConfig.xml的路径。
+		                        </p>
+		                    </td>
+		                </tr>
+
+		            </tbody>
+		        </table>
+		        <button id="upload" class="btn btn-large btn-primary">一键上传模板</button>
+		        <input class="btn btn-large btn-primary" type="reset" value="重置">
+		    </form>
+    	</div>
+    	<!-- 上传邮件模板 end -->
+    	<!-- 发邮件模块 start -->
+    	<div id="sendMailPage" class="tab-pane hide">
+    		<form name="sendMail">
+		        <table id="sendMailTable" class="table">
+		            <thead>
+		                <th width="15%">名称</th>
+		                <th width="50%">内容</th>
+		                <th width="35%">说明</th>
+		            </thead>
+		            <tbody>
+		                <tr>
+		                    <td>发件人地址：</td>
+		                    <td>
+		                        <input class="form-control" type="text" name="from" required="required"  placeholder="XXXXXXXXX@qq.com" value="">
+		                    </td>
+		                    <td>
+		                        <p>必须。发件人的邮箱地址,暂时只支持QQ邮箱。</p>
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td>账户密码：</td>
+		                    <td>
+		                        <input class="form-control" type="password" name="pass" required="required"  placeholder="发件人邮件密码" value="">
+		                    </td>
+		                    <td>
+		                        <p>必须。发件人的密码</p>
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td>发件人名称：</td>
+		                    <td>
+		                        <input class="form-control" type="text" name="mailFrom" placeholder="wei" value="">
+		                    </td>
+		                    <td>
+		                        <p>非必须。如果为空，则发件人名称为发件人邮箱地址</p>
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td>收件人地址：</td>
+		                    <td>
+		                        <input class="form-control" type="text" name="mailTo" required="required"  placeholder="XXXXXX@richinfo.cn" value="">
+		                    </td>
+		                    <td>
+		                        <p>必须。</p>
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td>主题：</td>
+		                    <td>
+		                        <input class="form-control" type="text" name="subject" placeholder="河北1008611话费查询热线节点" value="">
+		                    </td>
+		                    <td>
+		                        <p>非必须。</p>
+		                    </td>
+		                </tr>
+		                <tr id="dropMail">
+		                    <td>邮件文件路径：</td>
+		                    <td>
+		                    	<button id="mailHtml" class="btn btn-primary">选择邮件（仅支持html格式）</button>
+								&nbsp;&nbsp;&nbsp;&nbsp;可拖拽到此区域上传文件
+		
+							    <input id="mailHtmlInput" class="form-control" type="text" name="mailHtml" required="required"  placeholder="E:/delivery/api类/NG/hn0001/hn0001.html" value="">
+		                    </td>
+		                    <td>
+		                        <p>
+		                        	必须。要上传的web模板的路径。如果为空，则投递平台上的web模板也空
+		                        </p>
+		                    </td>
+		                </tr>
+
+		            </tbody>
+		        </table>
+		        <button id="send" class="btn btn-large btn-primary">下发邮件</button>
+		        <input class="btn btn-large btn-primary" type="reset" value="重置">
+		    </form>
+    	</div>
+    	<!-- 发邮件模块 end -->
+    	<!-- 更多说明 start -->
+    	<div id="eml" class="tab-pane hide">
+    		<div id="dropEml">
+    			<h2>把<code>.eml</code>文件拖拽到此区域</h2>
+    			<p>然后<code>.html</code>文件就会生成在启动程序目录下</p>
+    		</div>
+    		
+    	</div>
+    	<!-- 更多说明 end -->
+		<!-- 更多说明 start -->
+    	<div id="more" class="tab-pane hide">
+    		
+    		<div class="row" ms-controller="more">
+    			<div id="sidebar" class="col-sm-3">
+    				<input type="text" class="form-control" placeholder="标题搜索" ms-duplex="input">
+    				<ul class="nav nav-pills nav-stacked" role="tablist">
+    					<li role="presentation" ms-repeat="sidebar" ><a ms-attr-href="el[0]">{{el[1]}}</a></li>
+		    			<!-- <li role="presentation"><a href="#">1</a></li>
+		    			<li role="presentation"><a href="#">2</a></li>
+		    			<li role="presentation"><a href="#">3</a></li> -->
+		    		</ul>
+    			</div>
+    			<div id="article" class="col-sm-8 select" ms-html="panel">
+<!--     				<article class="markdown-body"><h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>判断文字是否存在</h1>
+<p>参考： 全国季度账单<br />
+lua：</p>
+<pre><code>l_cond_show(l_not_exist_string_show(l_get_value('QL_AREA0500','金额'),"nil") .. " == nil","%s","&lt;!--")
+</code></pre>
+<p>配置格式：略<br />
+数据格式：略<br />
+效果：略</p>
+<h1 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>双层柱状图</h1>
+<p>参考：重庆流量账单<br />
+lua：</p>
+<pre><code>p_fill_flow_trend('QL_GeneralFlowTrend')
+</code></pre>
+<p>配置格式：</p>
+<pre><code>&lt;Area Code="0400" Method="PrefixEqual"&gt;
+    &lt;DataSource Name="QL_GeneralFlowTrend" Type = "Mixed" SplitBy="~" MainFiled="月份:Key|区域码:AreaCode" MixedField="套餐内|套餐外"&gt;
+    &lt;/DataSource&gt;
+&lt;/Area&gt;
+</code></pre>
+<p>数据格式：</p>
+<pre><code>201311|0.00~0.00|040101
+201312|0.00~0.00|040102
+201401|0.00~0.00|040103
+201402|0.00~0.00|040104
+201403|0.00~0.00|040105
+201404|512.00~0.00|040106
+</code></pre>
+<p>效果：</p>
+<h1 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>彩色环形饼图</h1>
+<p>参考：全国季度账单<br />
+lua：</p>
+<pre><code>&lt;img src="http://deliveryimg.mail.10086.cn/imageserv?&lt;% r_echo(l_generate_qw_xf_circle_param('QL_AREA0101', 1, 2, l_get_value('QL_SHAREINFOXXX', '服务号码'))) %&gt;" /&gt;
+</code></pre>
+<p>配置格式：</p>
+<pre><code>&lt;Area Code="010001|010002|010003|010004|010005|010006|010007" Method="Gather"&gt;
+    &lt;DataSource Name="QL_AREA0101" Type="Map" MapField="费用项目:Key|金额:Value|区域码:AreaCode" /&gt; 
+&lt;/Area&gt;
+</code></pre>
+<p>数据格式：</p>
+<pre><code>套餐及固定费|46.00|010001
+语音通信费|36.00|010002
+上网费|20.00|010003
+短彩信费|6.00|010004
+其他费用|0.00|010005
+</code></pre>
+<p>效果：</p>
+<h1 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>彩色折线图</h1>
+<p>参考：全国季度账单<br />
+lua：</p>
+<pre><code>&lt;img src="http://deliveryimg.mail.10086.cn/imageserv?&lt;% r_echo(l_generate_qw_jd_histogram_param('QL_AREA0200', 1, 2, l_get_value('QL_SHAREINFO', '服务号码'))) %&gt;" /&gt;
+</code></pre>
+<p>配置格式：</p>
+<pre><code>&lt;Area Code="0200" Method="PrefixEqual"&gt;
+    &lt;DataSource Name="QL_AREA0200" Type = "Map" MapField="费用项目:Key|金额:Value|区域码:AreaCode"&gt;
+    &lt;/DataSource&gt;
+&lt;/Area&gt;
+</code></pre>
+<p>数据格式：</p>
+<pre><code>201601|201.50|020001
+201602|278.00|020002
+201603|387.50|020003
+</code></pre>
+<p>说明：彩色折线图只支持3个数据<br />
+效果：</p>
+<h1 id="_5"><a name="user-content-_5" href="#_5" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>排名小人图</h1>
+<p>参考：全国季度账单</p></article> -->
+    			</div>
+    		</div>
+    		
+    	</div>
+    	<!-- 更多说明 end -->
+    </div>
+
+</body>
+
+<script type="text/javascript" src="./app/lib/avalon.shim.js"></script>
+<script type="text/javascript" src="./app/index.dom.js"></script>
+<script type="text/javascript" src="./app/md4More.js"></script>
+</html>

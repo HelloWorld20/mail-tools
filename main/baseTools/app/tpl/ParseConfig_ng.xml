@@ -1,0 +1,44 @@
+<!-- 加上{{}}的地方是需要手动修改的参数 -->
+<?xml version="1.0" encoding="gb2312"?>
+<STRINGTOXML>
+	<!--读取公共部分数据，基本固定-->
+	<FixedNode Type="Reference" MapField="to:邮箱地址|toname:客户姓名|querytime:查询时间|title:邮件标题">
+		<DataSource Name="HEADER" Type = "Fix">
+		</DataSource>
+	</FixedNode>
+	<FetchNode Key="info">	
+		<!-- ItemID：数据中Item标签的ID。 -->
+		<GetItem ItemID="{{TELNUM}}">
+			<!-- FieldName：页面中索引中文值，此种方式能获取到value标签内所有内容 -->
+            <StringToField FieldName="{{手机号码}}">
+				<!-- Name：页面中索引英文值 -->
+				<!-- ng格式获取value内部所有内容 -->
+                <DataSource Name="{{TELNUM}}" Type="Fix">
+                </DataSource>
+            </StringToField>
+        </GetItem>
+		<GetItem ItemID="{{IDname1}}">
+			<!-- 此种方式是value标签内部数据是xml格式时，再进行解析，细分数据 -->
+			<StringToXml>
+				<!-- 获取某个标签内内容，可多份FetchNode嵌套 -->
+				<FetchNode Key="{{CUST_FEE}}">
+					<!-- ng格式获取单个数据格式 -->
+					<FixedNode Type="Reference" MapField="{{HF_FEE:话费账户余额}}">
+						<DataSource Name="{{FEE}}" Type = "Fix"></DataSource>
+					</FixedNode>
+				</FetchNode>
+			</StringToXml>
+        </GetItem>
+		<GetItem ItemID="{{IDname2}}">
+			<!-- 对应value标签内是xml格式时，此种方法能获取到某个标签内内容 -->
+			<StringToXml>
+				<!-- ng格式表格数据获取方式 -->
+				<FetchMultiseriateNode ColumnNames="{{bill_num|bill_code|bill_name}}">
+					<DataSource Name="{{INFO}}" Type="Mixed" SplitBy="~" MainFiled="{{发票号码}}:Key" MixedField="{{发票代码|发票名称}}">
+					</DataSource>
+				</FetchMultiseriateNode>
+			</StringToXml>
+        </GetItem>
+		<!-- 按需添加GetItem标签组。。。。 -->
+	</FetchNode>
+</STRINGTOXML>

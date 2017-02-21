@@ -1,0 +1,25 @@
+<!-- 加上{{}}的地方是需要手动修改的参数 -->
+<?xml version="1.0" encoding="gb2312"?>
+<STRINGTOXML>
+<!--读取公共部分数据，基本固定-->
+<FixedNode Type="Reference" MapField="to:邮箱地址|toname:客户名称|brand:客户等级|querytime:查询时间|title:邮件标题">
+	<DataSource Name="{{HEADER}}" Type = "Fix">
+	</DataSource>
+</FixedNode>
+<FetchNode Key="info">	
+	<FetchNode Key="request">
+		<!-- 读取单个数据 -->
+		<FixedNode Type="Reference" MapField="{{msisdn:手机号码|month:查询月份}}">
+			<!-- Name：页面中索引英文值 -->
+			<DataSource Name="{{SINGLE}}" Type="Fix"></DataSource>
+		</FixedNode>
+		<FetchNode Key="listdata">
+			<!-- 读取表格类型 -->
+			<FetchMultiseriateNode ColumnNames="{{packageName|pacakgeDetail}}">
+				<DataSource Name="{{LIST}}" Type="Mixed" SplitBy="~" MainFiled="{{套餐名称}}:Key" MixedField="{{套餐详情}}">
+				</DataSource>
+			</FetchMultiseriateNode>
+		</FetchNode>
+	</FetchNode>
+</FetchNode>
+</STRINGTOXML>

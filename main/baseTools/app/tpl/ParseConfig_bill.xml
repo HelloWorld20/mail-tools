@@ -1,0 +1,24 @@
+<!-- 加上{{}}的地方是需要手动修改的参数 -->
+<?xml version="1.0" encoding="gb2312"?>
+<Compose>
+<AREA Code="0" Method="Equal">
+	<DataSource Name="{{QL_YONGHUJBXX}}" Type = "Fix">
+	</DataSource>
+</AREA>
+<!-- Filter：过滤 -->
+<!-- 带~符号的，一行多份数据 -->
+<AREA Code="02" Method="PrefixEqual" CodeFilter="010000">
+	<DataSource Name="{{QL_ZHANGHUXINXI}}" Type="Mixed" SplitBy="~" MainFiled="{{账户项目:Key|区域码:AreaCode}}" MixedField="{{账户余额|上期结余|本期收入|已扣费用}}" Filter="{{备注}}">
+	</DataSource>
+</AREA>
+
+<AREA Code="0299" Method="PrefixEqual">
+	<DataSource Name="{{QL_ZHANGHUBEIZHU}}" Type = "Map" MapField="{{备注项目:Key|描述:Value|区域码:AreaCode}}" >
+	</DataSource>
+</AREA>
+
+<AREA Code="050000" Method="Equal">
+	<DataSource Name="{{QL_XIAOFEIQUSHI}}" Type="Map" MapField="{{项目:Key|链接地址:Value}}">
+	</DataSource>
+</AREA>
+</Compose>

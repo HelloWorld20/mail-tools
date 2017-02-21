@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="gb2312"?>
+<Package name="资源包配置">	
+  <ResourceName name="资源名称">{{fullName}}</ResourceName>
+	<TemplateGroup name="模板组">
+		<Template name="模板">
+			<TemplateName name="模板文件名称">{{fullName}}.html</TemplateName>
+			<!-- <WapScriptFileName name="wap生成脚本文件名">{{fullName}}.scr</WapScriptFileName>
+			<QvgaTemplateName name="QVGA模板文件名">{{fullName}}.qvga</QvgaTemplateName>
+			<MmsTemplateName name="MMS板文件名">{{fullName}}.mms</MmsTemplateName> -->
+		</Template>
+	</TemplateGroup>
+</Package>

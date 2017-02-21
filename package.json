@@ -1,0 +1,28 @@
+{
+  "name": "electron",
+  "version": "1.0.0",
+  "description": "my electron demo for delivery platform of 139 e-mail",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "package": "electron-packager . myApp --platform=win32 --arch=x64 --version=1.4.5 --ignore=node_modules/.bin --ignore=readme.md",
+    "packAll": "electron-packager . myApp --platform=all --arch=all --version=1.4.5 --ignore=node_modules/.bin --ignore=readme.md",
+    "asar": "asar pack electron app.asar"
+  },
+  "keywords": [
+    "electron",
+    "delivery",
+    "platform",
+    "139"
+  ],
+  "author": "weijianghong",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "iconv-lite": "^0.4.13",
+    "rimraf": "^2.5.4",
+    "superagent": "^2.3.0",
+    "superagent-charset": "^1.1.1",
+    "nodemailer": "^0.7.1"
+  }
+}
