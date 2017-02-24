@@ -53,6 +53,18 @@ electron是基于node和chrome开发的一套开发框架，实质上就是一�
 
 安装必要的依赖包。
 
+#修改账号和密码
+
+因为此工具基本不会变动账号和密码，所以直接写死在配置文件里。
+
+需要在main/baseTools/app/config.js里修改账户名和密码
+
+    username: '(账户名)',       //投递平台的用户名
+    password: '(密码的BASE64)',   //投递平台的密码的32位MD5
+    
+    loginMessage: '.UserLogin%2520.txtUserName=(账户名)&.UserLogin%2520.txtPassword=(密码的BASE64)',  //登录投递平台需要的登录账号密码信息。
+    
+    loginMessageTest: '.UserLogin%2520.txtUserName=(账户名)&.UserLogin%2520.txtPassword=(密码明文)!',    //登录测试线需要的信息
 
 #运行
 以上内容安装完成后，打开控制台，切换到项目目录下，执行
