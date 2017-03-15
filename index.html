@@ -14,8 +14,6 @@
 	</div>
 	</a>
     <h1>139投递平台开发辅助工具</h1>
-    We are using io.js <script>document.write(process.version)</script>
-    and Electron <script>document.write(process.versions['electron'])</script>.
     <hr>
 
     <ul id="nav" class="nav nav-tabs">
@@ -33,12 +31,16 @@
 	<div class="tab relative">
 		<!-- 登录 start -->
     	<div id="loginPage" class="tab-pane hide">
-    		登陆(暂不需要，去baseTools文件夹下的config.js文件修改就好)
+    		<div class="alert alert-warning" role="alert">
+				登陆(暂不需要，去baseTools文件夹下的config.js文件修改就好)
+			</div>
     	</div>
 		<!-- 登录 end -->
     	<!-- 生成原始文件配置 start -->
     	<div id="initPage" class="tab-pane">
-
+			<div class="alert alert-warning" role="alert">
+				生成gb2312编码格式的初始html和qvga模板文件、ParseConfig.xml、ResourcePakageConfig.xml文件和模板地址备份文件
+			</div>
 		    <form name="init">
 		        <table id="initTable" class="table">
 		            <thead>
@@ -50,7 +52,7 @@
 		                <tr>
 		                    <td>业务全称：</td>
 		                    <td>
-		                        <input class="form-control" type="text" name="fullName" required="required" placeholder="广东集团客户明细账单" value="">
+		                        <input class="form-control" type="text" name="fullName" required="required" placeholder="例如：广东集团客户明细账单" value="">
 		                    </td>
 		                    <td>
 		                        <p>必须。新建的文件夹名，以及web模板和wap模板的名字；</p>
@@ -59,14 +61,14 @@
 		                <tr>
 		                    <td>业务简称：</td>
 		                    <td>
-		                        <input class="form-control" type="text" name="shortName" required="required" placeholder="gdjtmx" value="">
+		                        <input class="form-control" type="text" name="shortName" required="required" placeholder="例如：gdjtmx" value="">
 		                    </td>
 		                    <td><p>必须。bill格式才必须，生成XXX.config文件</p></td>
 		                </tr>
 		                <tr>
 		                    <td>web模板地址：</td>
 		                    <td>
-		                        <input class="form-control" type="text" name="webUrl" required="required" placeholder="http://fun.mail.10086.cn/10086/ah/351011/ah0001.html" value="">
+		                        <input class="form-control" type="text" name="webUrl" required="required" placeholder="例如：http://fun.mail.10086.cn/10086/ah/351011/ah0001.html" value="">
 		                    </td>
 		                    <td>
 		                        <p>必须。设计稿Web模板url，为空则不生成</p>
@@ -75,7 +77,7 @@
 		                <tr>
 		                    <td>wap模板地址：</td>
 		                    <td>
-		                        <input class="form-control" type="text" name="wapUrl" required="required" placeholder="http://fun.mail.10086.cn/10086/ah/351011/ah0001_wap.html" value="">
+		                        <input class="form-control" type="text" name="wapUrl" required="required" placeholder="例如：http://fun.mail.10086.cn/10086/ah/351011/ah0001_wap.html" value="">
 		                    </td>
 		                    <td>
 		                        <p>必须。设计稿wap模板url，为空则不生成</p>
@@ -118,6 +120,9 @@
 		<!-- 生成原始文件配置 end -->
 		<!-- 爬取生产线配置 start -->
     	<div id="getFilePage" class="tab-pane hide">
+    		<div class="alert alert-warning" role="alert">
+    			爬取生产线上的邮件模板和邮件封装资源。
+    		</div>
     		<form name="getPage">
 		        <table id="getPageTable" class="table">
 		            <thead>
@@ -129,7 +134,7 @@
 		                <tr>
 		                    <td>业务全称：</td>
 		                    <td>
-		                        <input class="form-control" type="text" name="fullName" required="required" placeholder="广东集团客户明细账单" value="">
+		                        <input class="form-control" type="text" name="fullName" required="required" placeholder="例如：广东集团客户明细账单" value="">
 		                    </td>
 		                    <td>
 		                        <p>必须。新建的文件夹名，以及web模板和wap模板的名字；</p>
@@ -138,7 +143,7 @@
 		                <tr>
 		                    <td>邮件模板ID：</td>
 		                    <td>
-		                        <input class="form-control" type="text" name="yjmbID" required="required"  placeholder="21639" value="">
+		                        <input class="form-control" type="text" name="yjmbID" required="required"  placeholder="例如：21639" value="">
 		                    </td>
 		                    <td>
 		                        <p>必须。投递平台上邮件模板ID</p>
@@ -147,28 +152,28 @@
 		                <tr>
 		                    <td>封装资源ID：</td>
 		                    <td>
-		                        <input class="form-control" type="text" name="yjfzzyID" required="required" placeholder="13968" value="">
+		                        <input class="form-control" type="text" name="yjfzzyID" required="required" placeholder="例如：13968" value="">
 		                    </td>
 		                    <td>
-		                        <p>必须。投递平台上封装资源ID</p>
+		                        <p>必须。投递平台上封装资源ID。在控制台中才能找到。</p>
 		                    </td>
 		                </tr>
 		                <tr>
 		                    <td>web模板地址：</td>
 		                    <td>
-		                        <input class="form-control" type="text" name="webUrl" required="required" placeholder="http://fun.mail.10086.cn/10086/ah/351011/ah0001.html" value="">
+		                        <input class="form-control" type="text" name="webUrl" required="required" placeholder="例如：http://fun.mail.10086.cn/10086/ah/351011/ah0001.html" value="">
 		                    </td>
 		                    <td>
-		                        <p>必须。设计稿Web模板url，为空则不生成</p>
+		                        <p>非必须。设计稿Web模板url，为空则不生成</p>
 		                    </td>
 		                </tr>
 		                <tr>
 		                    <td>wap模板地址：</td>
 		                    <td>
-		                        <input class="form-control" type="text" name="wapUrl" required="required" placeholder="http://fun.mail.10086.cn/10086/ah/351011/ah0001_wap.html" value="">
+		                        <input class="form-control" type="text" name="wapUrl" required="required" placeholder="例如：http://fun.mail.10086.cn/10086/ah/351011/ah0001_wap.html" value="">
 		                    </td>
 		                    <td>
-		                        <p>必须。设计稿wap模板url，为空则不生成</p>
+		                        <p>非必须。设计稿wap模板url，为空则不生成</p>
 		                    </td>
 		                </tr>
 
@@ -183,6 +188,9 @@
 
     	<!-- 上传邮件模板 start -->
     	<div id="uploadFilePage" class="tab-pane hide">
+    		<div class="alert alert-warning" role="alert">
+				把ParseConfg.xml文件、html模板和qvga模板上传到测试线。
+    		</div>
     		<form name="upload">
 		        <table id="uploadTable" class="table">
 		            <thead>
@@ -194,7 +202,7 @@
 		                <tr>
 		                    <td>邮件模板名称：</td>
 		                    <td>
-		                        <input class="form-control" type="text" name="tplName" required="required"  placeholder="河北1008611话费查询热线节点" value="">
+		                        <input class="form-control" type="text" name="tplName" required="required"  placeholder="例如：河北1008611话费查询热线节点" value="">
 		                    </td>
 		                    <td>
 		                        <p>必须。投递平台上邮件模板名称。用于找到要对应的业务模板ID以及资源ID。如模板名有重复，则获取邮件模板列表的第一条记录。</p>
@@ -210,7 +218,7 @@
 									<input id="uploadHtmlDrop" type="file" name="html">
 							    </label> -->
 
-							    <input id="uploadHtmlInput" class="form-control" type="text" name="uploadHtml" required="required"  placeholder="E:/delivery/api类/NG/hn0001/hn0001.html" value="">
+							    <input id="uploadHtmlInput" class="form-control" type="text" name="uploadHtml" required="required"  placeholder="例如：E:/delivery/api类/NG/hn0001/hn0001.html" value="">
 		                    </td>
 		                    <td>
 		                        <p>
@@ -224,7 +232,7 @@
 		                    	<button id="uploadQvga" class="btn btn-primary">上传qvga模板</button>
 								&nbsp;&nbsp;&nbsp;&nbsp;可拖拽到此区域上传文件
 
-							    <input id="uploadQvgaInput" class="form-control" type="text" name="uploadQvga"  placeholder="E:/delivery/api类/NG/hn0001/hn0001.qvga" value="">
+							    <input id="uploadQvgaInput" class="form-control" type="text" name="uploadQvga"  placeholder="例如：E:/delivery/api类/NG/hn0001/hn0001.qvga" value="">
 		                    </td>
 		                    <td>
 		                        <p>
@@ -234,16 +242,16 @@
 		                </tr>
 
 		                <tr id="dropResource">
-		                    <td>ResouceConfig.xml文件：</td>
+		                    <td>ParseConfig.xml文件：</td>
 		                    <td>
 		                    	<button id="uploadResource" class="btn btn-primary">上传配置文件</button>
 								&nbsp;&nbsp;&nbsp;&nbsp;可拖拽到此区域上传文件
 
-							    <input id="uploadResourceInput" class="form-control" type="text" name="uploadResource"  placeholder="E:\delivery\api类\NG\安徽月账单查询\ParseConfig.xml" value="">
+							    <input id="uploadResourceInput" class="form-control" type="text" name="uploadResource"  placeholder="例如：E:\delivery\api类\NG\安徽月账单查询\ParseConfig.xml" value="">
 		                    </td>
 		                    <td>
 		                        <p>
-		                        	非必须。要上传的ResouceConfig.xml的路径。
+		                        	非必须。要上传的ParseConfig.xml的路径。
 		                        </p>
 		                    </td>
 		                </tr>
@@ -257,6 +265,9 @@
     	<!-- 上传邮件模板 end -->
     	<!-- 发邮件模块 start -->
     	<div id="sendMailPage" class="tab-pane hide">
+    		<div class="alert alert-warning" role="alert">
+				可以用自己的QQ邮箱发送html邮件（仅支持QQ邮箱）
+    		</div>
     		<form name="sendMail">
 		        <table id="sendMailTable" class="table">
 		            <thead>
@@ -304,7 +315,7 @@
 		                <tr>
 		                    <td>主题：</td>
 		                    <td>
-		                        <input class="form-control" type="text" name="subject" placeholder="河北1008611话费查询热线节点" value="">
+		                        <input class="form-control" type="text" name="subject" placeholder="例如：河北1008611话费查询热线节点" value="">
 		                    </td>
 		                    <td>
 		                        <p>非必须。</p>
@@ -316,7 +327,7 @@
 		                    	<button id="mailHtml" class="btn btn-primary">选择邮件（仅支持html格式）</button>
 								&nbsp;&nbsp;&nbsp;&nbsp;可拖拽到此区域上传文件
 		
-							    <input id="mailHtmlInput" class="form-control" type="text" name="mailHtml" required="required"  placeholder="E:/delivery/api类/NG/hn0001/hn0001.html" value="">
+							    <input id="mailHtmlInput" class="form-control" type="text" name="mailHtml" required="required"  placeholder="例如：E:/delivery/api类/NG/hn0001/hn0001.html" value="">
 		                    </td>
 		                    <td>
 		                        <p>
@@ -332,18 +343,23 @@
 		    </form>
     	</div>
     	<!-- 发邮件模块 end -->
-    	<!-- 更多说明 start -->
+    	<!-- eml转html start -->
     	<div id="eml" class="tab-pane hide">
+    		<div class="alert alert-warning" role="alert">
+				把eml文件转换成html文件，如果eml中包含qvga邮件则生成两个文件，分别对应html模板和qvga模板。仅支持由工具生成的eml邮件。
+    		</div>
     		<div id="dropEml">
     			<h2>把<code>.eml</code>文件拖拽到此区域</h2>
     			<p>然后<code>.html</code>文件就会生成在启动程序目录下</p>
     		</div>
     		
     	</div>
-    	<!-- 更多说明 end -->
+    	<!-- eml转html end -->
 		<!-- 更多说明 start -->
     	<div id="more" class="tab-pane hide">
-    		
+    		<div class="alert alert-warning" role="alert">
+    			一些额外的说明
+    		</div>
     		<div class="row" ms-controller="more">
     			<div id="sidebar" class="col-sm-3">
     				<input type="text" class="form-control" placeholder="标题搜索" ms-duplex="input">

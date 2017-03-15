@@ -7,6 +7,7 @@
 "use strict"
 const path = require('path');
 const iconv = require('iconv-lite');
+const {log} = require('../../../lib/core.js')
 
 const core = require('../lib/core.js');
 
@@ -45,6 +46,22 @@ module.exports = (filePath, callback) => {
 	})
 
 	let resultGbBuff = iconv.encode(result, 'base64');
+
+	//	从html中提取QVGA，转换成html
+	let forehead = resultGbBuff.indexOf('<WEB TYPE="QVGA">');
+	let backword = resultGbBuff.indexOf('</WEB>')
+
+	//如果有的话，
+	if(forehead !== -1 && backword !== -1) {
+		let qvgaResult = resultGbBuff.slice(forehead + 17, backword)
+
+		let qvgaGbBuff = iconv.encode(qvgaResult, 'base64');
+		core.writeFile( basename + '.qvga.html', qvgaGbBuff, "convert eml to qvga.html fail....");
+	} else {
+		log('当前eml中未包含qvga邮件!!')
+	}
+
+
 
 	core.writeFile( basename + '.html', resultGbBuff, "convert eml to html fail....");
 

@@ -6,6 +6,8 @@
 var iconv = require('iconv-lite');
 var fs = require('fs');
 
+const {log} = require('../../../lib/core.js')
+
 module.exports = {
 	//字符串转换成二进制。
 	str2Buff: (str) => {
@@ -47,6 +49,7 @@ module.exports = {
 	handleError: (err, msg) => {
 		if(err) {
 			console.error(err);
+			log('[Custom isError: ' + msg + ']')
 			throw new Error('[Custom isError: ' + msg + ']')
 		}
 	},
