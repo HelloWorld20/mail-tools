@@ -256,14 +256,14 @@ main.initDrag('#dropQvga', true, (e) => {
 	}
 	return false;
 });
-main.initDrag('#dropMail', true, (e) => {
-	let filePath = e.dataTransfer.files[0].path;
+// main.initDrag('#dropMail', true, (e) => {
+// 	let filePath = e.dataTransfer.files[0].path;
 
-	if( filePath && (filePath.slice(-5).toLowerCase()) === '.html') {
-		$("#mailHtmlInput").value = filePath;
-	}
-	return false;
-});
+// 	if( filePath && (filePath.slice(-5).toLowerCase()) === '.html') {
+// 		$("#mailHtmlInput").value = filePath;
+// 	}
+// 	return false;
+// });
 main.initDrag('#dropResource', true, (e) => {
 	let filePath = e.dataTransfer.files[0].path;
 
@@ -300,9 +300,9 @@ main.initFileSelector( '#uploadQvga', res => {
 main.initFileSelector( '#uploadResource', res => {
 	$("#uploadResourceInput").value = res;
 })
-main.initFileSelector( '#mailHtml', res => {
-	$("#mailHtmlInput").value = res;
-})
+// main.initFileSelector( '#mailHtml', res => {
+// 	$("#mailHtmlInput").value = res;
+// })
 
 //页面加载时读取默认配置文件
 
@@ -333,12 +333,12 @@ $("#upload").onclick = function(e) {
 
 }
 //绑定发送邮件按钮；
-$("#send").onclick = function(e) {
-	e.preventDefault();
-	let conf = main.getConfig( '#sendMailPage tbody input' );
+// $("#send").onclick = function(e) {
+// 	e.preventDefault();
+// 	let conf = main.getConfig( '#sendMailPage tbody input' );
 
-	main.send( {method: 'sendMail', value: conf} );
-}
+// 	main.send( {method: 'sendMail', value: conf} );
+// }
 
 //事件捕获可以让父元素代理blur事件
 //失焦的时候保存当前配置
@@ -385,6 +385,7 @@ vm.$watch('input', function(newVal, oldVal) {
 
 
 // 从markdown文章体提取标题和id的方法。不同的markdown解析方法不一样。
+// 如果markdown文章（about.html）的html结构有变，则需要修改getHead方法。
 function getHead(selector) {
 	let head = $$(selector);
 	let siderList = [];
@@ -405,6 +406,8 @@ main.initListener('markdown', function(event, res) {
 	vm.panel = res.value;
 	//延迟执行，让视图先同步到dom上先。
 	setTimeout(function() {
+		//avalon写法，只要把getHead返回的数组填充到vm.sidebar和allSiderbar里即可生成侧边栏。
+		//getHead返回的数组结构是['#(标题ID)','(标题正文)']
 		vm.sidebar = allSiderbar = getHead("#more article h1,#more article h2,#more article h3");
 	}, 20)
 })

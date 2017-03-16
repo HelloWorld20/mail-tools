@@ -6,7 +6,6 @@
 
 "use strict"
 
-const superagent = require('superagent');
 const config = require('./config.js');
 const core = require('./lib/core.js');
 const Counter = require('./lib/counter.js');
@@ -17,6 +16,8 @@ const getFile = require('./module/getFile.js');
 const createTemplateStorageFile = require('./module/createDefault.js').createTemplateStorageFile;
 
 const {log} = require('../../lib/core.js');
+
+
 
 module.exports = ( conf, callback ) => {
 	log('getFile.js');

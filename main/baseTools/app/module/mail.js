@@ -6,6 +6,7 @@
 const nodemailer  = require("nodemailer");
 const fs = require('fs');
 
+const {handleError} = require('../../../lib/core.js');
 const core = require('../lib/core.js');
 
 function sendMail( config, callback ) {
@@ -34,7 +35,8 @@ function sendMail( config, callback ) {
         subject : subject || 'Node.JS通过SMTP协议从QQ邮箱发送邮件',
         html    : html
     }, function(err, res) {
-        console.log(err, res);
+        console.log(res);
+        handleError(err);
     }); 
 
     if( core.isFunction(callback) ) callback();

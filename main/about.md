@@ -347,7 +347,7 @@ lua：
 6. 当前取的是第几部分。
 
 效果图：
-![l_fill_table_cond](../app/img/tableSample.jpg)
+![l_fill_table_cond](http://ww4.sinaimg.cn/large/8218e04fgw1fb3e4kwqgwj206u09eq3g.jpg)
 
 参考：`\bill\trunk\src\湖南和账单`
 

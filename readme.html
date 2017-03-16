@@ -1028,14 +1028,15 @@ body .markdown-body
 </code></pre>
 <p>保证node和npm都成功安装。</p>
 <h2 id="npm"><a name="user-content-npm" href="#npm" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>npm淘宝镜像</h2>
-<p><img alt="淘宝npm镜像" src="https://zos.alipayobjects.com/rmsportal/UQvFKvLLWPPmxTM.png" /><br />
-由于国内互联网环境使然，npm很可能不能正常使用。需安装npm淘宝镜像。<a href="https://npm.taobao.org/">npm淘宝镜像官网</a></p>
+<p><img alt="淘宝npm镜像" src="https://zos.alipayobjects.com/rmsportal/UQvFKvLLWPPmxTM.png" /></p>
+<p>由于国内互联网环境使然，npm很可能不能正常使用。需安装npm淘宝镜像。</p>
+<p><a href="https://npm.taobao.org/">npm淘宝镜像官网</a></p>
 <p>在控制台中执行</p>
 <pre><code>npm install -g cnpm --registry=https://registry.npm.taobao.org
 </code></pre>
 <h2 id="electron"><a name="user-content-electron" href="#electron" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>electron</h2>
-<p><img alt="electron" src="https://camo.githubusercontent.com/5dd01312b30468423cb45b582b83773f5a9019bb/687474703a2f2f656c656374726f6e2e61746f6d2e696f2f696d616765732f656c656374726f6e2d6c6f676f2e737667" /><br />
-electron是基于node和chrome开发的一套开发框架，实质上就是一个能让JavaScript拥有操作系统API的chrome浏览器。</p>
+<p><img alt="electron" src="https://camo.githubusercontent.com/5dd01312b30468423cb45b582b83773f5a9019bb/687474703a2f2f656c656374726f6e2e61746f6d2e696f2f696d616765732f656c656374726f6e2d6c6f676f2e737667" /></p>
+<p>electron是基于node和chrome开发的一套开发框架，实质上就是一个能让JavaScript拥有操作系统API的chrome浏览器。</p>
 <p><a href="http://electron.atom.io/">electron官方网站</a></p>
 <p>在控制台中执行</p>
 <pre><code>cnpm install electron -g
@@ -1045,11 +1046,18 @@ electron是基于node和chrome开发的一套开发框架，实质上就是一�
 </code></pre>
 <p>会打开一个electron简介页面。</p>
 <h2 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>安装依赖包</h2>
-<p>打开控制台，切换到项目目录下。执行</p>
+<p>打开控制台，切换到项目目录下（有package.json的目录）。执行</p>
 <pre><code>cnpm install
 </code></pre>
 <p>安装必要的依赖包。</p>
-<h1 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>执行</h1>
+<h1 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>修改账号和密码</h1>
+<p>因为此工具基本不会变动账号和密码，所以直接写死在配置文件里。</p>
+<p>需要在main/baseTools/app/config.js里修改账户名和密码</p>
+<pre><code>loginMessage: '.UserLogin%2520.txtUserName=(账户名)&amp;.UserLogin%2520.txtPassword=(密码的BASE64)',  //登录投递平台需要的登录账号密码信息。
+
+loginMessageTest: '.UserLogin%2520.txtUserName=(账户名)&amp;.UserLogin%2520.txtPassword=(密码明文)!',    //登录测试线需要的信息
+</code></pre>
+<h1 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>运行</h1>
 <p>以上内容安装完成后，打开控制台，切换到项目目录下，执行</p>
 <pre><code>electron .
 </code></pre>
@@ -1057,5 +1065,11 @@ electron是基于node和chrome开发的一套开发框架，实质上就是一�
 <pre><code>electron (项目路径根目录)
 </code></pre>
 <p>即可运行程序。</p>
-<h1 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>其他</h1>
-<p>打包功能有问题。暂不能打包。</p></article></body></html>
+<h1 id="_5"><a name="user-content-_5" href="#_5" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>修改“更多说明”内容</h1>
+<p>更多说明的正文内容是直接加载<code>main/about.html</code>的内容。修改about.html中的内容都能实时反映到更多内容正文上。但是更多内容左侧的标题搜索功能需要about.html有固定的html结构才能正确的解析出来。</p>
+<p>目前使用的是<code>sublime text3</code>的<code>markdown editing</code>和<code>markdown preview</code>插件通过<code>about.md</code>来生成的<code>about.html</code>。如果想要更换其他<code>markdown</code>编辑器生成<code>about.html</code>（不同的markdown编辑器生成的html文件html结构不同），或者想直接手动修改<code>about.html</code>文件，也可以修改<code>app/index.dom.js</code>中的<code>getHead</code>方法来更改正文标题的解析方法。</p>
+<h1 id="_6"><a name="user-content-_6" href="#_6" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>其他</h1>
+<ul>
+<li>打包功能有问题。暂不能打包。只能运行开发版本</li>
+<li>此程序在Windows10环境下开发，不保证在Linux和Mac环境下能完美运行。</li>
+</ul></article></body></html>

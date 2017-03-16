@@ -1,7 +1,9 @@
 自己实现的一个基于electron的工具程序，用于辅助开发139投递平台邮件模板的配置工作。没什么伟大的功能，只是为了减轻一下自己的工作量，同时学学新技术，练练手。
 
-#安装
-##node.js和npm
+# 安装
+
+## node.js和npm
+
 Node 是服务器的 JavaScript 运行环境。
 
 [node.js官网](https://nodejs.org/en/)，或自行百度。下载双击运行。安装程序会自动配置环境变量。
@@ -18,7 +20,8 @@ Node 是服务器的 JavaScript 运行环境。
 
 保证node和npm都成功安装。
 
-##npm淘宝镜像
+## npm淘宝镜像
+
 ![淘宝npm镜像](https://zos.alipayobjects.com/rmsportal/UQvFKvLLWPPmxTM.png)
 
 由于国内互联网环境使然，npm很可能不能正常使用。需安装npm淘宝镜像。
@@ -29,7 +32,8 @@ Node 是服务器的 JavaScript 运行环境。
 
     npm install -g cnpm --registry=https://registry.npm.taobao.org
 
-##electron
+## electron
+
 ![electron](https://camo.githubusercontent.com/5dd01312b30468423cb45b582b83773f5a9019bb/687474703a2f2f656c656374726f6e2e61746f6d2e696f2f696d616765732f656c656374726f6e2d6c6f676f2e737667)
 
 electron是基于node和chrome开发的一套开发框架，实质上就是一个能让JavaScript拥有操作系统API的chrome浏览器。
@@ -46,14 +50,14 @@ electron是基于node和chrome开发的一套开发框架，实质上就是一�
 
 会打开一个electron简介页面。
 
-##安装依赖包
+## 安装依赖包
 打开控制台，切换到项目目录下（有package.json的目录）。执行
 
     cnpm install
 
 安装必要的依赖包。
 
-#修改账号和密码
+# 修改账号和密码
 
 因为此工具基本不会变动账号和密码，所以直接写死在配置文件里。
 
@@ -63,7 +67,8 @@ electron是基于node和chrome开发的一套开发框架，实质上就是一�
     
     loginMessageTest: '.UserLogin%2520.txtUserName=(账户名)&.UserLogin%2520.txtPassword=(密码明文)!',    //登录测试线需要的信息
 
-#运行
+# 运行
+
 以上内容安装完成后，打开控制台，切换到项目目录下，执行
 
     electron .
@@ -74,7 +79,13 @@ electron是基于node和chrome开发的一套开发框架，实质上就是一�
 
 即可运行程序。
 
-#其他
+# 修改“更多说明”内容
+
+更多说明的正文内容是直接加载`main/about.html`的内容。修改about.html中的内容都能实时反映到更多内容正文上。但是更多内容左侧的标题搜索功能需要about.html有固定的html结构才能正确的解析出来。
+
+目前使用的是`sublime text3`的`markdown editing`和`markdown preview`插件通过`about.md`来生成的`about.html`。如果想要更换其他`markdown`编辑器生成`about.html`（不同的markdown编辑器生成的html文件html结构不同），或者想直接手动修改`about.html`文件，也可以修改`app/index.dom.js`中的`getHead`方法来更改正文标题的解析方法。
+
+# 其他
 
 * 打包功能有问题。暂不能打包。只能运行开发版本
 * 此程序在Windows10环境下开发，不保证在Linux和Mac环境下能完美运行。
