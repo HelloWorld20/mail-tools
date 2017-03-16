@@ -4,7 +4,7 @@
 
 投递平台生产线=》模板管理=》多副本邮件封装资源=》打开控制台=》选中需要的业务，封装资源ID在封装资源名称的前面，只是被隐藏起来而已。具体如下图：
 
-![封装资源ID](../app/img/findSourceId.png)
+![封装资源ID](https://raw.githubusercontent.com/HelloWorld20/mail-tools/master/app/img/findSourceId.png)
 
 ##双层柱状图
 lua：
@@ -347,7 +347,7 @@ lua：
 6. 当前取的是第几部分。
 
 效果图：
-![l_fill_table_cond](http://ww4.sinaimg.cn/large/8218e04fgw1fb3e4kwqgwj206u09eq3g.jpg)
+![l_fill_table_cond](https://raw.githubusercontent.com/HelloWorld20/mail-tools/master/app/img/tableSample.jpg)
 
 参考：`\bill\trunk\src\湖南和账单`
 
